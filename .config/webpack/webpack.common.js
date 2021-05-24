@@ -1,41 +1,42 @@
-const path = require('path')
-const ProgressPlugin = require('progress-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const path = require("path");
+const ProgressPlugin = require("progress-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
-  stats: 'minimal',
-  entry: path.resolve(__dirname, '../../src/main.js'),
+  stats: "minimal",
+  entry: path.resolve(__dirname, "../../src/main.js"),
   output: {
-    path: path.resolve(__dirname, '../../shopify/assets/'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, "../../shopify/assets/"),
+    filename: "bundle.js",
+    clean: false,
   },
   resolve: {
-    extensions: ['*', '.js', '.vue', '.json'],
+    extensions: ["*", ".js", ".vue", ".json"],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': path.resolve(__dirname, '../../src/'),
-      '@shopify-directory': path.resolve(__dirname, '../../shopify/')
-    }
+      vue$: "vue/dist/vue.esm.js",
+      "@": path.resolve(__dirname, "../../src/"),
+      "@shopify-directory": path.resolve(__dirname, "../../shopify/"),
+    },
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: "vue-loader",
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: "url-loader",
             options: {
-              limit: 8192
-            }
-          }
-        ]
-      }
-    ]
+              limit: 8192,
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new ProgressPlugin(),
@@ -43,9 +44,7 @@ module.exports = {
      * don't clean files with the 'static' keyword in their filename
      * docs: https://github.com/johnagan/clean-webpack-plugin
      */
-    new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['**/*', '!*static*']
-    }),
-    new VueLoaderPlugin()
-  ]
-}
+    new VueLoaderPlugin(),
+  ],
+};
+

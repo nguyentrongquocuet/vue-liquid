@@ -1,0 +1,177 @@
+{%- assign settings = section.settings -%}
+{%- assign sectionBackground = settings.background_color -%}
+{%- assign sideImage = settings.side_img -%}
+{%- assign mainImage = settings.main_img -%}
+
+{%- if sideImage -%}
+  {%- assign sideStyle = sideImage | img_url: '1920x1080'|append:"');" |prepend:"background-image: url('" -%}
+{%- endif -%}
+
+{%- assign mainImageStyle = "transform:translateX(-50%)" -%}
+
+{%- if mainImage -%}
+  {%- assign mainImageUrl = mainImage | img_url: '1920x1080' -%}
+{%- else -%}
+  {%- assign mainImageUrl = "https://cdn.shopify.com/s/files/1/0335/3526/2856/t/1/assets/1591777589929_1024x1024.png?v=16404095333790432278" -%}
+{%- endif -%}
+
+{%- assign textColor  = settings.text_color -%}
+{%- assign headingColor  = settings.heading_text_color -%}
+{%- assign mediaEffectClass  = settings.media_eff | prepend: 'img__wrapper--' -%}
+{%- assign direction = settings.direction -%}
+
+{%- if direction=='normal' -%}
+  {%- else -%}
+    {%- assign directionToken = direction |prepend: 'section__body--' -%}
+    {%- assign mainImageStyle = "transform:translateX(50%)" -%}
+    {% assign mediaDirectionToken = direction| prepend: 'section__media--' %}
+{%- endif -%}
+
+{%- assign blocks = section.blocks -%}
+
+<section class="section section--nopad section--horizontal2 section--fluid section--split" style="--section-bg: {{sectionBackground}}; --base-text-color: {{textColor}}; --heading-color: {{headingColor}}">
+  <div class="section__wrapper container-fluid">
+    <div class="row section__body {{directionToken}}">
+      <div class="col-12 col-lg-8 section__content">
+        <h2 class="section__slogan heading heading--light heading--upper h6">
+          a good place to build your startup
+        </h2>
+        <div class="block__list row">
+          {%- for block in blocks -%}
+            <div class="col-12 col-lg-10">
+              <div class="block row">
+                <div class="col-2 col-md-1">
+                  <div class="block__icon">
+                    {%- if block.settings.icon -%}
+                      <img alt="" class="" src="{{block.settings.icon | img_url: 'medium'}}">
+                    {%- else -%}
+                      <img alt="" class="" src="https://cdn.shopify.com/s/files/1/0335/3526/2856/t/1/assets/1591672062372_128x.png?v=11692692573143458445">
+                    {%- endif -%}
+                  </div>
+                </div>
+                <div class="block__content col-10 col-md-9">
+                  <h4 class="block__title heading h4">
+                    {{block.settings.title}}
+                  </h4>
+                  <p class="block__desc desc">
+                    {{block.settings.desc}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 section__media {{mediaDirectionToken}}" style="{{sideStyle}}">
+        <div class="img__wrapper {{mediaEffect}}" >
+          <!-- <img alt="" class="img section__img" src="https://cdn.shopify.com/s/files/1/0335/3526/2856/t/1/assets/1591777589929_1024x1024.png?v=16404095333790432278"> -->
+          <img alt="" class="img section__img" src="{{mainImageUrl}}">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Custom Section 5",
+  "settings": [
+    {
+      "id": "direction",
+      "type": "select",
+      "label": "Direction",
+      "options": [
+        {
+          "label": "Normal",
+          "value": "normal"
+        }, {
+          "label": "Reverse",
+          "value": "reverse"
+        }
+      ]
+    },
+    {
+      "id": "side_img",
+      "type": "image_picker",
+      "label": "Choose side image"
+    },
+    {
+      "id" :"main_img",
+      "type": "image_picker",
+      "label": "Choose main image"
+    },
+    {
+      "id":"background_color",
+      "type":"color",
+      "label": "Select background color",
+      "default": "#197BBD"
+    },
+    {
+        "id": "text_color",
+        "type":"color",
+        "label": "Select text color",
+        "default": "#FAFAFA"
+    },
+    {
+        "id": "heading_text_color",
+        "type":"color",
+        "label": "Select heading color",
+        "default": "#FFFFFF"
+    },
+    {
+      "id": "media_eff",
+      "type": "select",
+      "label": "Select effect on hover",
+      "default": "none",
+      "options": [
+      {
+        "label": "no",
+        "value": "none"
+      },
+      {
+        "label": "Scaling",
+        "value": "hoverscale"
+      },
+      {
+        "label" : "Classic",
+        "value" : "classic"
+      }]
+    }
+  ],
+  "blocks":[
+  {
+    "type":"simple_block",
+    "name": "Cell",
+    "settings": [
+    {
+        "id": "icon",
+        "type":"image_picker",
+        "label":"Add icon"
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Add title",
+      "default": "Write your title here",
+      "placeholder": "Write your title here"
+    },
+    {
+      "id": "desc",
+      "type": "text",
+      "label" : "Add description",
+      "default": "Our analyses are based on the actual facts and the market situation concerning your business area.",
+      "placeholder": "Our analyses are based on the actual facts and the market situation concerning your business area."
+    }
+    ]
+  }
+  ],
+  "presets": [
+    {
+      "category": "custom content",
+      "name": "Custom Section 5"
+    }
+  ],
+  "max_blocks": 4
+}
+{% endschema %}

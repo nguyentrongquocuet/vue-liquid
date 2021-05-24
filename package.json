@@ -28,7 +28,8 @@
     "settings:dev": "shopify-themekit --env=dev download config/settings_data.json --config .config/shopify/shopify.dev.yml",
     "settings:live": "shopify-themekit --env=live download config/settings_data.json --config .config/shopify/shopify.live.yml",
     "open:dev": "shopify-themekit open --env=dev --config .config/shopify/shopify.dev.yml",
-    "open:live": "shopify-themekit open --env=live --config .config/shopify/shopify.live.yml"
+    "open:live": "shopify-themekit open --env=live --config .config/shopify/shopify.live.yml",
+    "watch": "webpack --watch --config .config/webpack/webpack.dev.js"
   },
   "dependencies": {
     "axios": "^0.21.1",

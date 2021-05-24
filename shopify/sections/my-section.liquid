@@ -1,0 +1,118 @@
+
+<style>
+  .section.hero{
+    width:100%;
+    height:unset !important;
+  }
+
+  .section__wrapper{
+    height:100%;
+    position: relative;
+  }
+
+  .section__wrapper .img__container img{
+    width:100%;
+    height:100%;
+    position: absolute;
+    object-fit:cover;
+    left:0;
+    top:0;
+  }
+
+.section__wrapper .img__container{
+  position: relative;
+}
+  .has-aspect-ratio::after{
+    content:"";
+    display: block;
+    width:100%;
+    height:100%;
+    --aspect: calc( 3 / 2);
+    padding-bottom: calc(100% / var(--aspect));
+  }
+
+  .hero__content{
+    position: absolute;
+    z-index: 1;
+    left:0;
+    top:50%;
+    transform:translateY(-50%);
+    max-width:100%;
+    width: 100%;
+    padding: 0 50px;
+    text-align: center;
+    color:#fafafa;
+  }
+
+</style>
+
+
+<section class="section hero">
+  <div class="section__wrapper">
+      {% comment %} {%- if section.settings.useless == 'all_day' -%}
+          <h1>You choose {{section.settings.useless}}</h1>
+      {% endif %} {% endcomment %}
+      <div class="img__container has-aspect-ratio">
+      {%- if section.settings.logo.src -%}
+          <img src="{{section.settings.logo.src | img_url}}" alt="{{section.settings.logo.alt}}">
+      {%- else -%}
+          <img src="{{ 'https://loremflickr.com/320/240'}}" alt="">
+      {%- endif -%}
+      </div>
+      <div class="hero__content">
+        <h1>{{section.settings.title}}</h1>
+        <h3>{{section.settings.subtitle}}</h3>
+      </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name":"Section cua quoc",
+    "settings":[
+      {
+        "id": "logo",
+        "type": "image_picker",
+        "label": "Logo"
+      },{
+        "id": "title",
+        "type": "text",
+        "label": "Title",
+        "default":"Chao mung den voi web cua quoc",
+        "placeholder" : "Day la placeholder"
+      },{
+        "id": "subtitle",
+        "type": "text",
+        "label": "Subtitle",
+        "default":"Chao mung den voi web cua quoc subtitle",
+        "placeholder" : "Day la placeholder"
+      },
+      {
+        "id": "useless",
+        "type": "radio",
+        "label": "Useless",
+        "default":"all_day",
+        "options": [
+          {
+            "value" : "all_day",
+            "label": "I have all day"
+          },{
+            "value": "no_time",
+            "label": "I have no time"
+          }
+        ]
+      }
+    ]
+  ,"presets":[
+    {
+      "category":"Custom Content",
+      "name": "Section cua quoc 2",
+      "settings":{
+        "title": "Image with big title",
+        "subtitle":"Image with small subtitle",
+        "useless": "no_time"
+      }
+    }
+  ]
+  }
+{% endschema %}

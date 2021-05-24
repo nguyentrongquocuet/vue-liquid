@@ -1,20 +1,18 @@
 module.exports = {
   extends: [
-    'eslint:recommended',
-    'plugin:vue/recommended' // use 'plugin:vue/essential' for less strict linting rules - https://eslint.vuejs.org/rules
+    "eslint:recommended",
+    "plugin:vue/recommended", // use 'plugin:vue/essential' for less strict linting rules - https://eslint.vuejs.org/rules
   ],
-  plugins: [
-    'vue'
-  ],
+  plugins: ["vue"],
   parserOptions: {
     ecmaVersion: 2020,
-    sourceType: 'module'
+    sourceType: "module",
   },
   env: {
     node: true,
     commonjs: true,
     browser: true,
-    es6: true
+    es6: true,
   },
   ignorePatterns: [
     /**
@@ -31,5 +29,6 @@ module.exports = {
      */
     // 'quotes': ['error', 'single'],
     // 'semi': ['error', 'never']
-  }
-}
+  },
+};
+

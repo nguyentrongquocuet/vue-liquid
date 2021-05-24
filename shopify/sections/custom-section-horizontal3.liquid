@@ -1,0 +1,117 @@
+
+{%- assign settings = section.settings -%}
+{%- assign sectionBackgroundColor = settings.background_color -%}
+{%- assign sectionBackgroundImage = settings.background_image -%}
+
+{%- if settings.background_image -%}
+  {%- assign backgroundImageToken =   sectionBackgroundImage | img_url:'1920x1080'|prepend: "--section-bg-url: url('" |append:"');"-%}
+  {%- assign overlayClass = "section--overlay" -%}
+  {%- else -%}
+{%- endif -%}
+
+{%- assign mainImage = settings.main_img -%}
+
+{%- if mainImage -%}
+  {%- assign mainImageUrl = mainImage | img_url: '1920x1080' -%}
+{%- else -%}
+  {%- assign mainImageUrl = "https://cdn.shopify.com/s/files/1/0335/3526/2856/t/1/assets/1591801710227_1024x1024.jpg?v=17633573784412877702" -%}
+{%- endif -%}
+
+{%- assign textColor  = settings.text_color -%}
+{%- assign headingColor  = settings.heading_text_color -%}
+{%- assign mediaEffectClass  = settings.media_eff | prepend: 'img__wrapper--' -%}
+{%- assign direction = settings.direction -%}
+
+{%- if direction=='normal' -%}
+  {%- else -%}
+    {%- assign directionToken = direction |prepend: 'section__body--' -%}
+    {%- assign mainImageStyle = "transform:translateX(50%)" -%}
+    {% assign mediaDirectionToken = direction| prepend: 'section__media--' %}
+{%- endif -%}
+
+{%- assign textContent = settings.section_text -%}
+
+<section class="section section--nopad section--horizontal3 section--fluid section--split" style="{{backgroundImageToken}}; --section-bg-color: {{sectionBackgroundColor}}; --base-text-color: {{textColor}}; --heading-color: {{headingColor}}">
+  <div class="section__wrapper container-fluid">
+    <div class="row section__body {{directionToken}}">
+      <div class="col-12 col-lg-6 section__content">
+        <div class="col-12 col-lg-8">
+          <h2 class="section__slogan heading heading--light heading--upper h1">
+            a good place to build your startup
+          </h2>
+            <div class="section__text section__text--small">
+              {{textContent}}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 section__media {{mediaDirectionToken}}" >
+        <div class="img__wrapper img__wrapper--aspect10 {{mediaEffectClass}}" style={{mainImageStyle}}>
+          <img alt="" class="img section__img" src="{{mainImageUrl}}">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Custom Section 6",
+  "settings": [
+    {
+      "id": "direction",
+      "type": "select",
+      "label": "Direction",
+      "options": [
+        {
+          "label": "Normal",
+          "value": "normal"
+        }, {
+          "label": "Reverse",
+          "value": "reverse"
+        }
+      ]
+    },
+    {
+      "id" :"main_img",
+      "type": "image_picker",
+      "label": "Choose main image"
+    },
+    {
+      "id":"background_color",
+      "type":"color",
+      "label": "Select background color",
+      "default": "#197BBD"
+    },
+    {
+        "id": "text_color",
+        "type":"color",
+        "label": "Select text color",
+        "default": "#FAFAFA"
+    },
+    {
+        "id": "heading_text_color",
+        "type":"color",
+        "label": "Select heading color",
+        "default": "#FFFFFF"
+    },
+    {
+    "id": "background_image",
+    "type":"image_picker",
+    "label" :"Select background image"
+    },
+    {
+    "id": "section_text",
+    "type":"richtext",
+    "label":"Section Text",
+    "default":"<p>Default <em>richtext</em> <a href=\"https://example.com/\">content</a></p>"
+    }
+      ],
+  "presets": [
+    {
+      "category": "custom content",
+      "name": "Custom Section 6"
+    }
+  ]
+}
+{% endschema %}
