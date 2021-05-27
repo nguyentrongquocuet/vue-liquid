@@ -13,8 +13,8 @@
 
 {%- assign blocks = section.blocks -%}
 
-<section class="section section--horizontal section--split" style="--section-bg: {{sectionBackground}}; --base-text-color: {{textColor}}; --heading-color: {{headingColor}}">
-  <div v-my-directive></div>
+<section id="test-vue" class="section section--horizontal section--split" style="--section-bg: {{sectionBackground}}; --base-text-color: {{textColor}}; --heading-color: {{headingColor}}">
+  <renderlessMyComponent></renderlessMyComponent>
   <div class="section__wrapper container">
     <div class="row section__body {{directionToken}}">
       <div class="col-12 col-md-8 section__content">

@@ -1,22 +1,23 @@
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex";
 
 export default {
   computed: {
     ...mapState({
-      visible: state => state['my-module'].visible
-    })
+      visible: (state) => state["my-module"].visible,
+    }),
   },
   methods: {
     ...mapActions({
-      toggle: 'my-module/toggle'
-    })
+      toggle: "my-module/toggle",
+    }),
   },
-  render () {
+  render() {
     return this.$scopedSlots.default({
       visible: this.visible,
-      toggle: this.toggle
-    })
-  }
-}
+      toggle: this.toggle,
+    });
+  },
+};
 </script>
+

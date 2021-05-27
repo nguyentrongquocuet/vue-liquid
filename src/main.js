@@ -26,7 +26,7 @@ vueComponents.keys().forEach((key) => {
     : key
         .replace(/\.(\/|vue|js)/g, "")
         .replace(/(\/|-|_|\s)\w/g, (match) => match.slice(1).toUpperCase());
-
+  console.log("TEST--CPN_NAME", name);
   Vue.component(name, component);
 });
 
@@ -89,9 +89,9 @@ Vue.prototype.$axios = axios;
 /**
  * create vue instance
  */
-if (document.querySelector("#app"))
+if (document.querySelector("body"))
   new Vue({
-    el: "#app",
+    el: "body",
     store,
   });
 
